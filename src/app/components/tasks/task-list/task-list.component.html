@@ -1,4 +1,4 @@
-<div class="task-list-container">
+<div class="task-list-container" (scroll)="onScroll($event)">
   <div class="header">
     <div class="header-content">
       <h1 class="mat-headline-4">Mis Tareas</h1>
@@ -28,34 +28,35 @@
       </a>
     </ng-template>
     <ng-template pTemplate="end">
-      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalCount" />
+      <p-paginator class="noMovil" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+        [totalRecords]="totalCount" />
     </ng-template>
   </p-menubar>
 
   <div class="tasks-section">
-    <div *ngIf="isLoading" class="loading-state">
-      <mat-spinner diameter="40"></mat-spinner>
-      <p>Cargando tareas...</p>
-    </div>
-
-    <div *ngIf="!isLoading && tasks.length === 0" class="empty-state">
+    <div *ngIf="!isLoading && pendingTasksCount === 0" class="empty-state">
       <mat-icon class="empty-icon">assignment</mat-icon>
       <h3>No hay tareas</h3>
       <p>Comienza agregando tu primera tarea arriba.</p>
     </div>
 
     @if(isPending){
-    <div *ngIf="!isLoading && tasks.length > 0">
+    <div *ngIf="(!esDispositivoMovil && !isLoading) || pendingTasksCount > 0">
       <app-task-list-card [tasks]="pendingTasks" (editTask)="clickOnEdit($event)"
         (toggleTaskCompletion)="toggleTaskCompletion($event)"
         (deleteTask)="deleteTaskHandler($event)"></app-task-list-card>
     </div>
     }@else{
-    <div *ngIf="!isLoading && completedTasksCount > 0">
+    <div *ngIf="(!esDispositivoMovil && !isLoading) || completedTasksCount > 0">
       <app-task-list-card (toggleTaskCompletion)="toggleTaskCompletion($event)"
         [tasks]="completedTasks"></app-task-list-card>
     </div>
     }
+
+    <div *ngIf="isLoading" class="loading-state">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando tareas...</p>
+    </div>
   </div>
 </div>
 

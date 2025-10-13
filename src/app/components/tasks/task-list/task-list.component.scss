@@ -109,6 +109,10 @@
   border-top: 2px solid #e0e0e0;
 }
 
+.noMovil {
+  display: unset;
+}
+
 @media (max-width: 480px) {
   .task-list-container {
     padding: 0.5rem;
@@ -123,6 +127,10 @@
     gap: 0.5rem;
     align-items: flex-start;
   }
+
+  .noMovil {
+    display: none;
+  }
 }
 
 ::ng-deep .my-highlight-class .p-menuitem-link {
@@ -130,10 +138,14 @@
   border-radius: 14px;
 }
 
-::ng-deep .p-toolbar{
+::ng-deep .p-toolbar {
   border: unset;
 }
 
-::ng-deep .badgetClass{
+::ng-deep .badgetClass {
   padding-left: 17px;
+}
+
+::ng-deep .p-paginator {
+  background-color: unset;
 }

@@ -93,10 +93,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       switchMap(([response, email]) => {
         if (response)
           return this.authService.login(email);
-        else {
-          this.isLoading = false;
-          return EMPTY;
-        }
+
+        this.isLoading = false;
+        return EMPTY;
       }),
       catchError((error, originalObs) => {
         this.isLoading = false;
@@ -143,9 +142,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    * Verifica si el usuario ya está autenticado y lo redirige a la página principal
    */
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated())
       this.router.navigate(['/tasks']);
-    }
   }
 
   /**
@@ -160,11 +158,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Muestra un diálogo de confirmación al usuario
- * @param message - Mensaje a mostrar en el diálogo
- * @param header - Título del diálogo
- * @returns Observable que emite un booleano con la respuesta del usuario
- */
+   * Muestra un diálogo de confirmación al usuario
+   * @param message - Mensaje a mostrar en el diálogo
+   * @param header - Título del diálogo
+   * @returns Observable que emite un booleano con la respuesta del usuario
+   */
   confirmAction(message: string, header: string): Observable<boolean> {
     return new Observable((observer: Observer<boolean>) => {
       this.confirmationService.confirm({
@@ -183,16 +181,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   /**
- * Getter para acceder al control de email del formulario
- * @returns AbstractControl del campo email o null si no existe
- */
+   * Getter para acceder al control de email del formulario
+   * @returns AbstractControl del campo email o null si no existe
+   */
   get email() {
     return this.loginForm.get('email');
   }
 
   /**
- * Limpia las suscripciones para prevenir memory leaks
- */
+   * Limpia las suscripciones para prevenir memory leaks
+   */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
