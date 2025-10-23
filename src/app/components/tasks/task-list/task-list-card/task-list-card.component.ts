@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { Task } from '../../../../core/models/api.models';
@@ -10,7 +10,8 @@ import { TaskListItemComponent } from '../task-list-item/task-list-item.componen
   standalone: true,
   imports: [CommonModule, ConfirmPopupModule, TaskListItemComponent, MatCardModule],
   templateUrl: './task-list-card.component.html',
-  styleUrl: './task-list-card.component.scss'
+  styleUrl: './task-list-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 /**
  * Componente de presentación para mostrar una lista de tareas en formato tarjeta

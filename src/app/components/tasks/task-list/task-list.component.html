@@ -42,14 +42,14 @@
 
     @if(isPending){
     <div *ngIf="(!esDispositivoMovil && !isLoading) || pendingTasksCount > 0">
-      <app-task-list-card [tasks]="pendingTasks" (editTask)="clickOnEdit($event)"
+      <app-task-list-card [tasks]="tasks.filter(t => !t.completed)" (editTask)="clickOnEdit($event)"
         (toggleTaskCompletion)="toggleTaskCompletion($event)"
         (deleteTask)="deleteTaskHandler($event)"></app-task-list-card>
     </div>
     }@else{
     <div *ngIf="(!esDispositivoMovil && !isLoading) || completedTasksCount > 0">
       <app-task-list-card (toggleTaskCompletion)="toggleTaskCompletion($event)"
-        [tasks]="completedTasks"></app-task-list-card>
+        [tasks]="tasks.filter(t => t.completed)"></app-task-list-card>
     </div>
     }
 

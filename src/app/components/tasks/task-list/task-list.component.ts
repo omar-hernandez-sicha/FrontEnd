@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ROUTES } from '../../../core/constants/routes';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
@@ -148,7 +149,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     if (!this.currentUser) {
-      this.router.navigate(['/login']);
+      this.router.navigate([`/${ROUTES.login}`]);
       return;
     }
 
@@ -378,7 +379,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
    */
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate([`/${ROUTES.login}`]);
   }
 
   /**

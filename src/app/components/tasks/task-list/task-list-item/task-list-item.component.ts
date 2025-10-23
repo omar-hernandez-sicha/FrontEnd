@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CardModule } from 'primeng/card';
 import { Task } from '../../../../core/models/api.models';
@@ -12,7 +12,8 @@ import { TaskService } from '../../../../core/services/task.service';
   standalone: true,
   imports: [CardModule, CommonModule, MatCheckboxModule, ButtonModule, MatIconModule],
   templateUrl: './task-list-item.component.html',
-  styleUrl: './task-list-item.component.scss'
+  styleUrl: './task-list-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListItemComponent {
   @Input() task: Task | undefined;

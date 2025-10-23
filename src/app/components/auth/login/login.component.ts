@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ROUTES } from '../../../core/constants/routes';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { catchError, combineLatest, EMPTY, Observable, Observer, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -21,6 +22,7 @@ import { AuthService } from '../../../core/services/auth.service';
     ReactiveFormsModule, MatProgressSpinnerModule, MatIconModule, ConfirmDialogModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ConfirmationService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -126,7 +128,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             'Cerrar',
             { duration: 3000 }
           );
-          this.router.navigate(['/tasks']);
+          this.router.navigate([`/${ROUTES.tasks}`]);
         } else {
           this.snackBar.open(
             response.error || 'Error en el login',
@@ -143,7 +145,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     if (this.authService.isAuthenticated())
-      this.router.navigate(['/tasks']);
+      this.router.navigate([`/${ROUTES.tasks}`]);
   }
 
   /**
